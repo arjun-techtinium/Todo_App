@@ -1,0 +1,14 @@
+<form (ngSubmit)="saveTask()">
+  <label for="name">Title:</label>
+  <input type="text" id="name" [(ngModel)]="task.name" name="name" required />
+
+  <label for="description">Description:</label>
+  <textarea id="description" [(ngModel)]="task.description" name="description"></textarea>
+
+  <label for="dueDate">Due Date:</label>
+  <input type="date" id="dueDate" [(ngModel)]="task.dueDate" name="dueDate" required />
+
+  <button type="submit">Save</button>
+  <button type="button" (click)="clearForm()">Clear</button>
+</form>
+
