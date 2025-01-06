@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
   standalone:false
 })
 export class AppComponent {
+filterTasks() {
+throw new Error('Method not implemented.');
+}
   title = 'todo-project';
   searchTerm: string = '';
 }

@@ -1,4 +1,4 @@
-<form (ngSubmit)="saveTask()">
+<form (ngSubmit)="saveTask()" class="task-form">
   <label for="name">Title:</label>
   <input type="text" id="name" [(ngModel)]="task.name" name="name" required />
 
@@ -8,7 +8,8 @@
   <label for="dueDate">Due Date:</label>
   <input type="date" id="dueDate" [(ngModel)]="task.dueDate" name="dueDate" required />
 
-  <button type="submit">Save</button>
-  <button type="button" (click)="clearForm()">Clear</button>
+  <div class="form-buttons">
+    <button type="submit" class="save-btn">Save</button>
+    <button type="button" (click)="clearForm()" class="clear-btn">Clear</button>
+  </div>
 </form>
-

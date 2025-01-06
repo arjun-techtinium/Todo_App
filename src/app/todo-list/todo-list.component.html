@@ -2,16 +2,20 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Title</th>
+      <th>Name</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let task of filteredTasks()">
+    <tr *ngFor="let task of filteredTasks">
       <td>{{ task.id }}</td>
       <td>{{ task.name }}</td>
       <td>
-        <button (click)="editTask(task.id)">✔</button>
+        {{ getStatusText(task.status) }}
+      </td>
+      <td>
+        <button (click)="markCompleted(task.id)">✔</button>
         <button (click)="deleteTask(task.id)">✘</button>
       </td>
     </tr>

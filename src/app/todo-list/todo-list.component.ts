@@ -9,33 +9,50 @@ import { Todo } from '../module/todo';
 })
 export class TodoListComponent {
   tasks: Todo[] = [];
+  filteredTasks: Todo[] = [];
   searchTerm: string = '';
 
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    this.filteredTasks = [...this.tasks];
   }
 
-  filteredTasks(): Todo[] {
-    return this.tasks.filter(task => task.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+  filterTasks() {
+    this.filteredTasks = this.tasks.filter(task =>
+      task.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
-editTask(id: number) {
-  const task = this.tasks.find(task => task.id === id);
-  if (task){
-    task.status = 2;
+  getStatusText(status: number): string {
+    switch (status) {
+      case 0:
+        return 'Created';
+      case 1:
+        return 'In Progress';
+      case 2:
+        return 'Completed';
+      case 3:
+        return 'Deleted';
+      default:
+        return '';
+    }
+  }
+
+  markCompleted(id: number) {
+    const task = this.tasks.find(t => t.id === id);
+    if (task) {
+      task.status = 2;
+      this.saveTasks();
+    }
+  }
+
+  deleteTask(id: number) {
+    this.tasks = this.tasks.filter(t => t.id !== id);
     this.saveTasks();
+    this.filterTasks();
   }
-}
 
-deleteTask(id: number) {
-  const task = this.tasks.find(task => task.id === id);
-  if (task){
-    task.status = 3;
-    this.saveTasks();
+  saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
-}
-
-saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(this.tasks));
-}
 }
